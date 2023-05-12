@@ -11,16 +11,11 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleBtnClick = e => {
-    this.setState(prevState => {
-      let newState = { ...prevState };
-      for (const key in newState) {
-        if (key === e.target.textContent) {
-          newState[key] += 1;
-        }
-      }
-      return newState;
-    });
+  handleBtnClick = feedback => {
+    this.setState(prevState => ({
+      [feedback]: prevState[feedback] + 1,
+    }));
+    console.log(feedback);
   };
 
   countTotalFeedback = state => {
@@ -40,7 +35,7 @@ export class App extends Component {
       <div>
         <Section title="Please leave your feedback">
           <FeedbackOptions
-            options={Object.keys(this.state)}
+            options={['good', 'neutral', 'bad']}
             onLeaveFeedback={this.handleBtnClick}
           />
         </Section>
